@@ -3,9 +3,20 @@
 #background{
     scroll-snap-align: start;
     height: 100vh;
+    position: relative;
     width:100%;
-    background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url("https://veekun.com/static/pokedex/downloads/heartgold-soulsilver-frame2.png");
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255,255,255,0.5)), url("https://veekun.com/static/pokedex/downloads/heartgold-soulsilver-frame2.png");
     
+    .button-float{
+        background-color: $pokered;
+        position: fixed;
+        width: fit-content;
+        height: 60px;
+        bottom: 80px;
+        right: 200px;
+        border-radius: 25px;
+    }
+
     .search{
         align-items: center;
         justify-content: center;
@@ -66,20 +77,39 @@
     .pokemon-container{
         margin:0;
         text-align: center;
-
-        padding:20px;
-        background-color: $white;
-        width: 400px;
+        box-shadow: 5px 5px 5px $grey;
+        padding:5px;
+        background-color: $pokered;
+        width: 325px;
         border-width: 2px;
-        border-radius: 10px;
+        border-radius: 3px;
+        .sprite-container{
+            width: 100%;
+            background-color: white;
+            border-radius: 3px;
+        }
+        .row-id{
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        }
+
         img{
             width: 50%;
         }
-        
-        p{
-            font-size: 30px;
+        span{
+            color:$white;
         }
-        
+        h3{
+            color:$white;
+        }
+        .button-boot{
+            color:$pokered;
+            background-color: $white;
+            width:90%;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
     }
 
     .logo{
