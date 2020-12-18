@@ -6,16 +6,13 @@ import './types.scss';
 import logo from '../../images/logo.png';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
 import { Pokemon } from '../../services/types';
+import ModalPokedex from '../ModalPokedex';
 import Row from 'react-bootstrap/Row';
-import { useSnackbar } from 'notistack';
 import SearchIcon from '@material-ui/icons/Search';
-import {
-  addFavorite,
-  removeFavorite,
-} from '../../store/ducks/favorites/actions';
+import { addFavorite } from '../../store/ducks/favorites/actions';
 import axios from 'axios';
+import { useSnackbar } from 'notistack';
 
 //interfaces
 
@@ -67,6 +64,18 @@ const SearchPage: React.FC = () => {
                 ? response.data.sprites.front_default
                 : '',
             type: response.data.types !== undefined ? response.data.types : '',
+            hp:
+              response.data.stats[0].base_stat.length !== 0
+                ? response.data.stats[0].base_stat
+                : 0,
+            attack:
+              response.data.stats[1].base_stat.length !== 0
+                ? response.data.stats[1].base_stat
+                : 0,
+            defense:
+              response.data.stats[2].base_stat.length !== 0
+                ? response.data.stats[2].base_stat
+                : 0,
           });
         }
       })
@@ -81,7 +90,10 @@ const SearchPage: React.FC = () => {
   return (
     <div id="background">
       <Button
-        onClick={() => setShow(true)}
+        onClick={() => {
+          setShow(true);
+          console.log(show);
+        }}
         className="button-float"
         variant="danger"
       >
@@ -136,13 +148,8 @@ const SearchPage: React.FC = () => {
             <Row className="row-id">
               <div>
                 <img
+                  className="img-id"
                   src="https://www.pngkit.com/png/full/19-190666_pokeball-graphic-by-maratuna-on-deviantart-banner-free.png"
-                  style={{
-                    width: '15px',
-                    height: '15px',
-                    marginTop: '-2px',
-                    padding: '2px',
-                  }}
                 />
                 <span>{pokemon.id}</span>
               </div>
@@ -156,8 +163,27 @@ const SearchPage: React.FC = () => {
                 </div>
               ))}
             </Row>
+            <div className="stats">
+              <div>
+                <span>attack</span>
+                <h2>{pokemon.attack}</h2>
+              </div>
+              <div>
+                <span>hp</span>
+                <h1>{pokemon.hp}</h1>
+              </div>
+              <div>
+                <span>defense</span>
+                <h2>{pokemon.defense}</h2>
+              </div>
+            </div>
             <Button
-              onClick={() => dispatch(addFavorite(pokemon))}
+              onClick={() => {
+                dispatch(addFavorite(pokemon));
+                enqueueSnackbar('Pokemon added to your Pokedex!', {
+                  variant: 'success',
+                });
+              }}
               className="button-boot"
               variant="danger"
             >
@@ -166,21 +192,7 @@ const SearchPage: React.FC = () => {
           </div>
         </div>
       )}
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={() => dispatch(removeFavorite(3))}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ModalPokedex value={show} handleClose={handleClose} />
     </div>
   );
 };
