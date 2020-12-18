@@ -1,12 +1,12 @@
 //import { action } from 'typesafe-actions';
-import { FavoritesState, FavoritesTypes } from './types';
+import { FavoritesState, FavoritesTypes, Pokemon } from './types';
 
-export const addFavorite = (data: FavoritesState) => {
-  return { type: FavoritesTypes.UPDATE_FAVORITES, payload: data };
+export const addFavorite = (data: Pokemon) => {
+  return { type: FavoritesTypes.ADD_FAVORITES, payload: data };
   //action(FavoritesTypes.UPDATE_USER, { data });
 };
 
-export const removeUser = () => {
-  return { type: FavoritesTypes.REMOVE_FAVORITES };
+export const removeFavorite = (id: number) => {
+  return { type: FavoritesTypes.REMOVE_FAVORITES, payload: id };
   //action(FavoritesTypes.REMOVE_USER);
 };

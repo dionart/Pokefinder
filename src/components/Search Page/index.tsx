@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, RootStateOrAny } from 'react-redux';
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 //importações
 import './styles.scss';
 import './types.scss';
 import logo from '../../images/logo.png';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import { Pokemon } from '../../services/types';
 import Row from 'react-bootstrap/Row';
 import { useSnackbar } from 'notistack';
 import SearchIcon from '@material-ui/icons/Search';
+import {
+  addFavorite,
+  removeFavorite,
+} from '../../store/ducks/favorites/actions';
 import axios from 'axios';
 
 //interfaces
@@ -24,12 +29,18 @@ interface User {
 
 const SearchPage: React.FC = () => {
   //selector para pegar informações do usuário logado
+  const dispatch = useDispatch();
   const user: User = useSelector((state: RootStateOrAny) => state.user.user);
   //declarações de constantes
+  const [show, setShow] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [pokemon, setPokemon] = useState<Pokemon>();
   const [searchText, setSearchText] = useState('');
   const { enqueueSnackbar } = useSnackbar();
+
+  const handleClose = () => {
+    setShow(false);
+  };
 
   useEffect(() => {
     axios.get('https://pokeapi.co/api/v2/pokemon').then(response => {
@@ -69,7 +80,11 @@ const SearchPage: React.FC = () => {
 
   return (
     <div id="background">
-      <Button className="button-float" variant="danger">
+      <Button
+        onClick={() => setShow(true)}
+        className="button-float"
+        variant="danger"
+      >
         <img className="logo" src={logo} />
         MY POKEDEX
       </Button>
@@ -141,12 +156,31 @@ const SearchPage: React.FC = () => {
                 </div>
               ))}
             </Row>
-            <Button className="button-boot" variant="danger">
+            <Button
+              onClick={() => dispatch(addFavorite(pokemon))}
+              className="button-boot"
+              variant="danger"
+            >
               ADD TO MY POKEDEX
             </Button>{' '}
           </div>
         </div>
       )}
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={() => dispatch(removeFavorite(3))}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

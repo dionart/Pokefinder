@@ -1,11 +1,11 @@
 /**
  * Action types
- * @UPDATE_FAVORITES update user infos
+ * @ADD_FAVORITES update user infos
  * @REMOVE_FAVORITES remove user infos
  */
 export enum FavoritesTypes {
-  UPDATE_FAVORITES = '@constructionCompany/HANDLE_USER',
-  REMOVE_FAVORITES = '@constructionCompany/REMOVE_USER',
+  ADD_FAVORITES = '@pokedex/HANDLE_POKEMON',
+  REMOVE_FAVORITES = '@pokedex/REMOVE_POKEMON',
 }
 
 /**
@@ -25,8 +25,8 @@ export interface Pokemon {
 
 /**
  * State type
- * @data : the constructionCompany
+ * @data : the pokedex
  */
 export interface FavoritesState {
-  favorites: Pokemon;
+  favorites: Pokemon[];
 }

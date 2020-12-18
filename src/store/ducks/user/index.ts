@@ -27,6 +27,7 @@ const reducer: Reducer<UserState> = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
     case UserTypes.UPDATE_USER:
+      console.log(action);
       updatedUserState.user = action.payload.user;
       // localStorage.setItem(
       //   environment.REACT_APP_LOCAL_STORAGE_USER_AUTH,
