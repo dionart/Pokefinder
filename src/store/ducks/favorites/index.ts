@@ -12,7 +12,6 @@ const reducer: Reducer<any> = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
     case FavoritesTypes.ADD_FAVORITES:
-      console.log(action.payload);
       updatedFavoritesState.favorites = [
         ...updatedFavoritesState.favorites,
         action.payload,
@@ -21,7 +20,6 @@ const reducer: Reducer<any> = (state = INITIAL_STATE, action) => {
       return { ...state, ...updatedFavoritesState };
 
     case FavoritesTypes.REMOVE_FAVORITES:
-      console.log(action.payload);
       const filtered = updatedFavoritesState.favorites.filter(
         (filteredItem: Pokemon) => filteredItem.id !== action.payload,
       );

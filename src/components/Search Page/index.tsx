@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 //importações
 import './styles.scss';
 import './types.scss';
 import logo from '../../images/logo.png';
+import pokeball from '../../images/pokeball.png';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Pokemon } from '../../services/types';
@@ -25,12 +26,13 @@ interface User {
 }
 
 const SearchPage: React.FC = () => {
+  const favorites: any = useSelector(
+    (state: RootStateOrAny) => state.favorites,
+  );
   //selector para pegar informações do usuário logado
   const dispatch = useDispatch();
-  const user: User = useSelector((state: RootStateOrAny) => state.user.user);
   //declarações de constantes
   const [show, setShow] = useState(false);
-  const [showMap, setShowMap] = useState(false);
   const [pokemon, setPokemon] = useState<Pokemon>();
   const [searchText, setSearchText] = useState('');
   const { enqueueSnackbar } = useSnackbar();
@@ -39,19 +41,13 @@ const SearchPage: React.FC = () => {
     setShow(false);
   };
 
-  useEffect(() => {
-    axios.get('https://pokeapi.co/api/v2/pokemon').then(response => {
-      console.log(response.data.results);
-    });
-  }, []);
-
-  const search = async () => {
+  const search = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault();
     const formattedText = searchText.toLowerCase().trim();
     await axios
       .get(`https://pokeapi.co/api/v2/pokemon/${formattedText}`)
       .then(response => {
         if (response.data.id !== '') {
-          console.log('setei');
           setPokemon({
             id: response.data.id !== undefined ? response.data.id : '',
             name: response.data.name !== undefined ? response.data.name : '',
@@ -81,10 +77,28 @@ const SearchPage: React.FC = () => {
       })
       .catch(() => {
         setPokemon(undefined);
+        enqueueSnackbar("We couldn't find any pokemon with this name", {
+          variant: 'error',
+        });
       });
-
-    console.log(pokemon);
     //setstuff();
+  };
+
+  const handleInput = () => {
+    const filteredItems = favorites.favorites.find(
+      (favoriteItem: any) => favoriteItem.id === pokemon?.id,
+    );
+
+    if (filteredItems) {
+      enqueueSnackbar('This pokemon is already on your Pokedex!', {
+        variant: 'error',
+      });
+    } else {
+      dispatch(addFavorite(pokemon));
+      enqueueSnackbar('Pokemon added to your Pokedex!', {
+        variant: 'success',
+      });
+    }
   };
 
   return (
@@ -92,7 +106,6 @@ const SearchPage: React.FC = () => {
       <Button
         onClick={() => {
           setShow(true);
-          console.log(show);
         }}
         className="button-float"
         variant="danger"
@@ -101,11 +114,11 @@ const SearchPage: React.FC = () => {
         MY POKEDEX
       </Button>
 
-      <div className={showMap ? 'search active' : 'search'}>
+      <div className="search">
         <img className="logo" src={logo} />
         <a>Pokefinder</a>
 
-        <div className="d-flex">
+        <Form className="d-flex" onSubmit={search}>
           <div>
             <Form.Group className="form-search">
               <Form.Control
@@ -120,7 +133,6 @@ const SearchPage: React.FC = () => {
 
           <div className="ml-3">
             <Button
-              onClick={() => search()}
               style={{ boxShadow: 'none' }}
               id="ir"
               className="btn-lg pb-4"
@@ -130,7 +142,7 @@ const SearchPage: React.FC = () => {
               <SearchIcon style={{ fontSize: 28 }} />
             </Button>
           </div>
-        </div>
+        </Form>
       </div>
 
       {pokemon && (
@@ -147,10 +159,7 @@ const SearchPage: React.FC = () => {
             </div>
             <Row className="row-id">
               <div>
-                <img
-                  className="img-id"
-                  src="https://www.pngkit.com/png/full/19-190666_pokeball-graphic-by-maratuna-on-deviantart-banner-free.png"
-                />
+                <img className="img-id" src={pokeball} />
                 <span>{pokemon.id}</span>
               </div>
 
@@ -178,12 +187,7 @@ const SearchPage: React.FC = () => {
               </div>
             </div>
             <Button
-              onClick={() => {
-                dispatch(addFavorite(pokemon));
-                enqueueSnackbar('Pokemon added to your Pokedex!', {
-                  variant: 'success',
-                });
-              }}
+              onClick={() => handleInput()}
               className="button-boot"
               variant="danger"
             >

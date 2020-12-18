@@ -30,9 +30,10 @@
         width: 250px;
         border-radius: 3px;
         .sprite-container{
-            width: 100%;
-            background-color: white;
-            border-radius: 3px;
+          position: relative;
+          width: 100%;
+          background-color: white;
+          border-radius: 3px;
         }
         .row-id{
             display: grid;

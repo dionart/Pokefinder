@@ -3,8 +3,10 @@ import './styles.scss';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Modal from 'react-bootstrap/Modal';
 import { removeFavorite } from '../../store/ducks/favorites/actions';
+import { useSnackbar } from 'notistack';
 
 // import { Container } from './styles';
 interface ModalProps {
@@ -13,15 +15,17 @@ interface ModalProps {
 }
 
 const ModalPokedex: React.FC<ModalProps> = props => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const favorites: any = useSelector(
     (state: RootStateOrAny) => state.favorites,
   );
   const dispatch = useDispatch();
-  console.log(favorites);
+
   return (
     <Modal show={props.value} onHide={props.handleClose} centered>
       <Modal.Header className="text-center" closeButton>
-        <Modal.Title>My Pokedex</Modal.Title>
+        <Modal.Title style={{ color: 'white' }}>My Pokedex</Modal.Title>
       </Modal.Header>
       <Modal.Body className="modal-content">
         <ul>
@@ -29,6 +33,27 @@ const ModalPokedex: React.FC<ModalProps> = props => {
             <li>
               <div id="penis" className="pokemon-container">
                 <div className="sprite-container">
+                  <Button
+                    onClick={() => {
+                      dispatch(removeFavorite(favoriteItem.id));
+                    }}
+                    style={{
+                      marginTop: '5px',
+                      marginRight: '5px',
+                      padding: 0,
+                      boxShadow: 'none',
+                      position: 'absolute',
+                      top: 0,
+                      right: 0,
+                      width: '10%',
+                    }}
+                    id="ir"
+                    variant="danger"
+                    type="submit"
+                  >
+                    <DeleteIcon style={{ fontSize: 18 }} />
+                  </Button>
+
                   <img src={favoriteItem?.sprite} />
                 </div>
                 <Row className="row-id">
@@ -70,14 +95,6 @@ const ModalPokedex: React.FC<ModalProps> = props => {
           ))}
         </ul>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={props.handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={() => dispatch(removeFavorite(3))}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 };
