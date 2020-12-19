@@ -59,13 +59,14 @@ const ModalPokedex: React.FC<ModalProps> = props => {
                     <DeleteIcon style={{ fontSize: 18 }} />
                   </Button>
 
-                  <img src={favoriteItem?.sprite} />
+                  <img src={favoriteItem?.sprite} alt="pokemon-sprite" />
                 </div>
                 <Row className="row-id">
                   <div>
                     <img
                       className="img-id"
                       src="https://www.pngkit.com/png/full/19-190666_pokeball-graphic-by-maratuna-on-deviantart-banner-free.png"
+                      alt="pokeball"
                     />
                     <span>{favoriteItem.id}</span>
                   </div>

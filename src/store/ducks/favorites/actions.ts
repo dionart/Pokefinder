@@ -1,5 +1,5 @@
 //import { action } from 'typesafe-actions';
-import { FavoritesState, FavoritesTypes, Pokemon } from './types';
+import { FavoritesTypes, Pokemon } from './types';
 
 export const addFavorite = (data: Pokemon | undefined) => {
   return { type: FavoritesTypes.ADD_FAVORITES, payload: data };

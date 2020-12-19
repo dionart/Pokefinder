@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 //importações
 import './styles.scss';
@@ -109,13 +109,13 @@ const SearchPage: React.FC = () => {
         className="button-float"
         variant="danger"
       >
-        <img className="logo" src={logo} />
+        <img className="logo" src={logo} alt="logo" />
         MY POKEDEX
       </Button>
 
       <div className="search">
-        <img className="logo" src={logo} />
-        <a>Pokefinder</a>
+        <img className="logo" src={logo} alt="search" />
+        <a href="https://pokeapi.co/">Pokefinder</a>
 
         <Form className="d-flex" onSubmit={search}>
           <div>
@@ -154,11 +154,11 @@ const SearchPage: React.FC = () => {
         >
           <div className="pokemon-container">
             <div className="sprite-container">
-              <img src={pokemon?.sprite} />
+              <img src={pokemon?.sprite} alt="sprite" />
             </div>
             <Row className="row-id">
               <div>
-                <img className="img-id" src={pokeball} />
+                <img className="img-id" src={pokeball} alt="pokeball" />
                 <span>{pokemon.id}</span>
               </div>
 
