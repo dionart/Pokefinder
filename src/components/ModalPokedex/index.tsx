@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './styles.scss';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
@@ -7,8 +7,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Modal from 'react-bootstrap/Modal';
 import { removeFavorite } from '../../store/ducks/favorites/actions';
 import { useSnackbar } from 'notistack';
+import { Pokemon } from '../../services/types';
 
-// import { Container } from './styles';
+// props received to active modal
 interface ModalProps {
   value: boolean;
   handleClose(): any;
@@ -17,6 +18,7 @@ interface ModalProps {
 const ModalPokedex: React.FC<ModalProps> = props => {
   const { enqueueSnackbar } = useSnackbar();
 
+  //selector to get favorites from redux state
   const favorites: any = useSelector(
     (state: RootStateOrAny) => state.favorites,
   );
@@ -29,13 +31,16 @@ const ModalPokedex: React.FC<ModalProps> = props => {
       </Modal.Header>
       <Modal.Body className="modal-content">
         <ul>
-          {favorites.favorites.map((favoriteItem: any) => (
+          {favorites.favorites.map((favoriteItem: Pokemon) => (
             <li>
-              <div id="penis" className="pokemon-container">
+              <div className="pokemon-container">
                 <div className="sprite-container">
                   <Button
                     onClick={() => {
-                      dispatch(removeFavorite(favoriteItem.id));
+                      dispatch(removeFavorite(Number(favoriteItem.id)));
+                      enqueueSnackbar('Pokemon withdrawn from your Pokedex!', {
+                        variant: 'success',
+                      });
                     }}
                     style={{
                       marginTop: '5px',

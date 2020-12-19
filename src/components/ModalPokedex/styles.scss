@@ -86,3 +86,13 @@
   align-items: center !important;
 }
 
+@media screen and (max-width: 1043px) {
+  .modal-content{
+    .modal-content.modal-body{
+      width: 50% !important;
+    }
+    .pokemon-container{
+      width: 50% !important;
+    }
+  }
+}

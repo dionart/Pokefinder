@@ -135,6 +135,40 @@
     }
 }
 
+@media screen and (max-width: 1041px) {
+    .search{
+        padding-top: 90px !important;
+    }
+    a{   
+        font-size: 35px !important;
+    }
+    .form-search{
+        width: 250px !important;
+        .form-control{
+            font-size: 14px;
+        }
+    }
+    #background{
+        .button-float{
+            background-color: $pokered;
+            position: fixed;
+            width: fit-content;
+            height: 60px;
+            bottom: 0px;
+            right: 120px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-bottom: 30px;
+           
+        }
+        .pokemon-container{
+            width: 350px !important;
+            img{
+                width: 35%;
+            }
+        }
+    }
+}
 
 @media screen and (max-width: 602px) {
     .form-search{
@@ -159,6 +193,9 @@
 }
 
 @media screen and (max-width: 433px) {
+    .search{
+        padding-top: 90px !important;
+    }
     a{   
         font-size: 35px !important;
     }
@@ -166,6 +203,26 @@
         width: 250px !important;
         .form-control{
             font-size: 14px;
+        }
+    }
+    #background{
+        .button-float{
+            background-color: $pokered;
+            position: fixed;
+            width: fit-content;
+            height: 60px;
+            bottom: 0px;
+            right: 120px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-bottom: 30px;
+           
+        }
+        .pokemon-container{
+            width: 350px !important;
+            img{
+                width: 35%;
+            }
         }
     }
 }
@@ -212,6 +269,26 @@
     a{   
         font-size: 35px !important;
     }
+    #background{
+        .button-float{
+            background-color: $pokered;
+            position: fixed;
+            width: fit-content;
+            height: 60px;
+            bottom: 0px;
+            right: 100px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-bottom: 20px;
+           
+        }
+        .pokemon-container{
+            width: 350px !important;
+            img{
+                width: 35%;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 323px) {
@@ -229,6 +306,25 @@
     }
     .form-search{
         width: 190px !important;
+    }
+    #background{
+        .button-float{
+            background-color: $pokered;
+            position: fixed;
+            width: fit-content;
+            height: 60px;
+            bottom: 0px;
+            right: 80px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+        .pokemon-container{
+            width: 250px !important;
+            img{
+                width: 35%;
+            }
+        }
+
     }
 
 }

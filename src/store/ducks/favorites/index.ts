@@ -1,8 +1,8 @@
 import { Reducer } from 'redux';
 import { FavoritesState, FavoritesTypes } from './types';
-import { environment } from '../../../environment/environment';
 import { Pokemon } from '../../../services/types';
 
+//setting inital state as empty array
 const INITIAL_STATE: FavoritesState = {
   favorites: [],
 };
@@ -12,6 +12,7 @@ const reducer: Reducer<any> = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
     case FavoritesTypes.ADD_FAVORITES:
+      //adding new favorite to existing array
       updatedFavoritesState.favorites = [
         ...updatedFavoritesState.favorites,
         action.payload,
@@ -20,6 +21,7 @@ const reducer: Reducer<any> = (state = INITIAL_STATE, action) => {
       return { ...state, ...updatedFavoritesState };
 
     case FavoritesTypes.REMOVE_FAVORITES:
+      //filtering the pokemons that aren't the one that I want to delete
       const filtered = updatedFavoritesState.favorites.filter(
         (filteredItem: Pokemon) => filteredItem.id !== action.payload,
       );

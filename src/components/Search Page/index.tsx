@@ -15,39 +15,36 @@ import { addFavorite } from '../../store/ducks/favorites/actions';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 
-//interfaces
-
-interface User {
-  id: string;
-  token: string;
-  name: string;
-  email: string;
-  password: string;
-}
-
 const SearchPage: React.FC = () => {
+  //selector to get favorites
   const favorites: any = useSelector(
     (state: RootStateOrAny) => state.favorites,
   );
-  //selector para pegar informações do usuário logado
+
+  //constants declarations
   const dispatch = useDispatch();
-  //declarações de constantes
   const [show, setShow] = useState(false);
   const [pokemon, setPokemon] = useState<Pokemon>();
   const [searchText, setSearchText] = useState('');
   const { enqueueSnackbar } = useSnackbar();
 
+  //Function to close Modal
   const handleClose = () => {
     setShow(false);
   };
 
+  //search function
   const search = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
+    //formatting text to lowercase and trimming
     const formattedText = searchText.toLowerCase().trim();
+    //api call
     await axios
       .get(`https://pokeapi.co/api/v2/pokemon/${formattedText}`)
       .then(response => {
+        //if response id
         if (response.data.id !== '') {
+          //setting current pokemon data
           setPokemon({
             id: response.data.id !== undefined ? response.data.id : '',
             name: response.data.name !== undefined ? response.data.name : '',
@@ -84,6 +81,7 @@ const SearchPage: React.FC = () => {
     //setstuff();
   };
 
+  //function to see if that pokemon's already on your pokedex
   const handleInput = () => {
     const filteredItems = favorites.favorites.find(
       (favoriteItem: any) => favoriteItem.id === pokemon?.id,
@@ -94,6 +92,7 @@ const SearchPage: React.FC = () => {
         variant: 'error',
       });
     } else {
+      //adding to redux
       dispatch(addFavorite(pokemon));
       enqueueSnackbar('Pokemon added to your Pokedex!', {
         variant: 'success',
