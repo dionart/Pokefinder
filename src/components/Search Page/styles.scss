@@ -1,0 +1,335 @@
+@import '../../mixin.scss';
+
+#background{
+    scroll-snap-align: start;
+    height: 100vh;
+    position: relative;
+    width:100%;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255,255,255,0.5)), url("https://veekun.com/static/pokedex/downloads/heartgold-soulsilver-frame2.png");
+    
+    .button-float{
+        background-color: $pokered;
+        position: fixed;
+        width: fit-content;
+        height: 60px;
+        bottom: 80px;
+        right: 200px;
+        border-radius: 25px;
+    }
+
+    .search{
+        align-items: center;
+        justify-content: center;
+        padding-top: 270px;
+        width:100% !important;
+        text-align: center;
+        
+        a{   
+             z-index: 2;
+             font-weight: 600;
+             color: $white !important;
+             text-shadow: 2px 2px #ff0000;
+             font-size: 45px;
+             letter-spacing: 1.3px;
+             margin-left: -43px;
+         
+        }
+     
+        img{
+            z-index: 1;
+            
+            width: 50px;
+            padding-bottom: 30px;
+        }
+     
+        .d-flex{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+             
+            #ir{
+                margin-top: -15px;
+                height: 47px;
+                width:100%;
+                background-color: $pokered;
+                border-color: $pokered;
+            }
+         
+            .form-search{
+                width: 500px;
+            }
+        }
+         
+        button{
+            outline: none;
+            border: 0;
+            background-color:transparent ;
+        
+            h1{
+                padding-bottom: 12px;
+                color: $grey;
+                font-size: 18px;
+            }
+        }
+
+    }
+
+    .pokemon-container{
+        margin:0;
+        text-align: center;
+        box-shadow: 5px 5px 5px $grey;
+        padding:5px;
+        background-color: $pokered;
+        width: 325px;
+        border-width: 2px;
+        border-radius: 3px;
+        .sprite-container{
+            width: 100%;
+            background-color: white;
+            border-radius: 3px;
+        }
+        .row-id{
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            img{
+                width: 15px;
+                height: 15px;
+                margin-top: -2px;
+                margin-left: -10px;
+                padding: 2px;
+            }
+        }
+
+        img{
+            width: 50%;
+        }
+        span{
+            color:$white;
+        }
+        h3{
+            color:$white;
+        }
+        .button-boot{
+            color:$pokered;
+            background-color: $white;
+            width:90%;
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .stats{
+            display:flex;
+            justify-content: space-between;
+            padding: 10px 40px 0 40px;
+            h1,h2{
+                color:$white;
+            }
+        }
+    
+    }
+
+    .logo{
+        width:35px;
+        margin-right: 5px;
+    }
+}
+
+@media screen and (max-width: 1041px) {
+    .search{
+        padding-top: 90px !important;
+    }
+    a{   
+        font-size: 35px !important;
+    }
+    .form-search{
+        width: 250px !important;
+        .form-control{
+            font-size: 14px;
+        }
+    }
+    #background{
+        .button-float{
+            background-color: $pokered;
+            position: fixed;
+            width: fit-content;
+            height: 60px;
+            bottom: 0px;
+            right: 120px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-bottom: 30px;
+           
+        }
+        .pokemon-container{
+            width: 350px !important;
+            img{
+                width: 35%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 602px) {
+    .form-search{
+        width: 350px !important;
+        .form-control{
+            font-size: 18px;
+        }
+    }
+   
+}
+
+@media screen and (max-width: 492px) {
+    a{   
+        font-size: 35px !important;
+    }
+    .form-search{
+        width: 350px !important;
+        .form-control{
+            font-size: 18px;
+        }
+    }
+}
+
+@media screen and (max-width: 433px) {
+    .search{
+        padding-top: 90px !important;
+    }
+    a{   
+        font-size: 35px !important;
+    }
+    .form-search{
+        width: 250px !important;
+        .form-control{
+            font-size: 14px;
+        }
+    }
+    #background{
+        .button-float{
+            background-color: $pokered;
+            position: fixed;
+            width: fit-content;
+            height: 60px;
+            bottom: 0px;
+            right: 120px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-bottom: 30px;
+           
+        }
+        .pokemon-container{
+            width: 350px !important;
+            img{
+                width: 35%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 412px) {
+    .search{
+        padding-top: 90px !important;
+    }
+
+    a{   
+        font-size: 35px !important;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .search{
+        padding-top: 40px !important;
+        a{
+            font-size: 30px !important;
+        }
+        img{
+            width: 45px !important;
+        }
+    }
+    a{   
+        font-size: 35px !important;
+    }
+    .form-search{
+        width: 250px !important;
+    }
+}
+
+
+@media screen and (max-width: 362px) {
+    .search{
+        padding-top: 40px !important;
+        a{
+            font-size: 30px !important;
+        }
+        img{
+            width: 45px !important;
+        }
+    }
+    a{   
+        font-size: 35px !important;
+    }
+    #background{
+        .button-float{
+            background-color: $pokered;
+            position: fixed;
+            width: fit-content;
+            height: 60px;
+            bottom: 0px;
+            right: 100px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-bottom: 20px;
+           
+        }
+        .pokemon-container{
+            width: 350px !important;
+            img{
+                width: 35%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 323px) {
+    .search{
+        padding-top: 40px !important;
+        a{
+            font-size: 30px !important;
+        }
+        img{
+            width: 35px !important;
+        }
+    }
+    a{   
+        font-size: 30px !important;
+    }
+    .form-search{
+        width: 190px !important;
+    }
+    #background{
+        .button-float{
+            background-color: $pokered;
+            position: fixed;
+            width: fit-content;
+            height: 60px;
+            bottom: 0px;
+            right: 80px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+        .pokemon-container{
+            width: 250px !important;
+            img{
+                width: 35%;
+            }
+        }
+
+    }
+
+}
+
+
+
+
+
